@@ -1,11 +1,14 @@
 /*
-Write a method to replace all spaces in a string with %20. You may assume the string has sufficient space at the end to hold the additional characters and you are given the 'true'   leength of the string.
-
-Example
-
-Input  "Mr John Smith"
-
-Output "Mr%20John%20Smith"
+*
+* Author: Vyaas Narendra Shenoy
+*
+*Write a method to replace all spaces in a string with %20. You may assume the string has sufficient space at the end to hold the additional characters and you are given the 'true'   leength of the string.
+*
+*Example
+*
+*Input  "Mr John Smith"
+*
+*Output "Mr%20John%20Smith"
 */
 
 package main
