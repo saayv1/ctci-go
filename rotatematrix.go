@@ -7,16 +7,21 @@ import(
 func MatrixRotate(matrix [][]int) {
 	fmt.Println(matrix)
 	n:= len(matrix)
-	for i:=0; i<n/2 ;i++ {
-		m := len(matrix[i])
-		for j:=i ; j<n-i-1; j++ {
-			temp := matrix[i][j]
-			
-			matrix[i][j] = matrix[n-i-1][j]
-			matrix[n-i-1][j]=matrix[n-i-1][m-j-1]
-			matrix[n-i-1][m-j-1] = matrix[i][m-j-1];
-			matrix[i][m-j-1] = temp
-			
+	fmt.Println(n/2)
+	m:=len(matrix[0])
+	if m!=n {
+		fmt.Println("Not a square matrix")
+		return
+	}
+	for layer:=0; layer<n/2 ;layer++ {
+		last:= n-1-layer
+		for j:=layer ; j<n-layer-1; j++ {
+			offset := j-layer
+			temp := matrix[layer][j]	
+			matrix[layer][j] = matrix[last - offset][layer]
+			matrix[last-offset][layer]=matrix[n-layer-1][last-offset]
+			matrix[n-layer-1][last-offset] = matrix[j][n-layer-1];
+			matrix[j][n-layer-1] = temp
 		}
 	}
 	fmt.Println(matrix)
