@@ -20,19 +20,26 @@ func zeromatrix(matrix [][]int) {
 	fmt.Println(positionArray)
 	for i := 0; i < len(positionArray); i++ {
 		if i%2 != 0 {
+			nullifyRow(matrix,positionArray[i])
 		} else {
-			i1 := i + 1
-			for a := 0; a < m; a++ {
-				k := positionArray[i1]
-				matrix[a][k] = 0
-			}
-			for a := 0; a < n; a++ {
-				k := positionArray[i]
-				matrix[k][a] = 0
-			}
+			nullifyColumn(matrix,positionArray[i])
 		}
 	}
 	fmt.Println(matrix)
+}
+
+
+ func nullifyRow(matrix [][]int, column int) {
+	for i:=0 ; i< len(matrix) ; i++ {
+		matrix[i][column]=0
+	}
+}
+
+
+func nullifyColumn(matrix [][]int, row int) {
+        for i:=0 ; i< len(matrix[0]) ; i++ {
+                matrix[row][i]=0
+        }
 }
 
 func main() {
