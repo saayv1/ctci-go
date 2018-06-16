@@ -1,55 +1,64 @@
 package linkedList
-import(
-"errors"
+
+import (
+//	"fmt"
+	"errors"
 )
-type node struct {
-	Next *node
-	Previous *node
-	Data int
+
+type Node struct {
+	Next     *Node
+	Previous *Node
+	Data     int
 }
 
-func InitializeNode(value int) node {
-	nv := node{nil,nil, value}
-	return nv
+func InitializeNode(value int) *Node {
+	nv := Node{nil, nil, value}
+	return &nv
 }
 
-func (n *node)AddToBack( value int)(node,error){
-	var nv node
+func (n *Node) AddToBack(value int) (*Node, error) {
+	var nv Node
 	if n.Previous != nil {
-		return nv, errors.New("Cannot append")
+		return &nv, errors.New("Cannot append")
 	}
-	nv = node{n,nil,value}
+	nv = Node{n, nil, value}
 	n.Previous = &nv
-	return nv,nil
+	return &nv, nil
 }
 
-func(n *node)AddToFront(value int)(node,error){
-	var nv node
-	if n.Next!=nil	{
-		return nv,errors.New("Cannot append to the rear")
+func (n *Node) AddToFront(value int) (*Node, error) {
+	var nv Node
+	if n.Next != nil {
+		return &nv, errors.New("Cannot append to the rear")
 	}
-	nv = node{nil,n,value}
+	nv = Node{nil, n, value}
 	n.Next = &nv
-	return nv,nil
+	return &nv, nil
 }
 
-func (n *node)GoToTheFront(){
+func (n *Node) GoToTheFront() {
 	for {
 		if n.Next == nil {
-			return;
+			return
 		} else {
-			*n=*n.Next;
+			*n = *n.Next
 		}
 	}
 }
 
-
-func (n *node)GoToTheBack(){
-	for{
+func (n *Node) GoToTheBack() {
+	for {
 		if n.Previous == nil {
 			return
 		} else {
-			*n = *n.Previous
+			*n =*n.Previous
 		}
 	}
+}
+
+func Delete(n Node) {
+	n1 := *n.Previous
+	n2 := *n.Next
+	n1.Next = &n2
+	n2.Previous = &n1
 }
