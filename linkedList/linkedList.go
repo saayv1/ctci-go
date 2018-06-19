@@ -1,6 +1,7 @@
 package linkedList
 
 import (
+	"fmt"
 	"errors"
 )
 
@@ -22,6 +23,7 @@ func (n *Node) AddToBack(value int) (*Node, error) {
 	}
 	nv = Node{n, nil, value}
 	n.Previous = &nv
+
 	return &nv, nil
 }
 
@@ -32,27 +34,33 @@ func (n *Node) AddToFront(value int) (*Node, error) {
 	}
 	nv = Node{nil, n, value}
 	n.Next = &nv
+
 	return &nv, nil
 }
 
 func (n *Node) GoToTheFront() {
-	for {
-		if n.Next == nil {
-			return
-		} else {
-			*n = *n.Next
-		}
+	for n.Next != nil {
+		*n = *n.Next
 	}
 }
 
 func (n *Node) GoToTheBack() {
-	for {
-		if n.Previous == nil {
-			return
-		} else {
-			*n =*n.Previous
-		}
+	for n.Previous != nil {
+		*n = *n.Previous
 	}
+}
+
+func (n *Node) Oscillate(){
+	for n.Previous!=nil {
+		fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
+		*n= *n.Previous
+	}
+	for i:=0 ; i<=3; i++ {
+                fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
+                *n= *n.Next
+        }
+	fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
+
 }
 
 func Delete(n Node) {
@@ -61,3 +69,4 @@ func Delete(n Node) {
 	n1.Next = &n2
 	n2.Previous = &n1
 }
+

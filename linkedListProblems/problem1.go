@@ -5,17 +5,6 @@ import (
 	"fmt"
 )
 
-func printStuff(n linkedList.Node) {
-	for {
-		if n.Previous == nil {
-			fmt.Println(n.Data)
-			return
-		} else {
-			fmt.Println(n.Data)
-			n = *n.Previous
-		}
-	}
-}
 
 func ps2(n linkedList.Node) {
 	for n.Next!=nil {
@@ -28,19 +17,20 @@ func ps2(n linkedList.Node) {
 
 func addStuff(sli []int)linkedList.Node{
 	node:= linkedList.InitializeNode(sli[0])
+	np := node
 	for _,s:= range sli {
-		node,_ = node.AddToFront(s)
-		node.GoToTheFront()
+		np,_ =np.AddToFront(s)
+		np.GoToTheFront()
 	}
-	//node.GoToTheBack();
-	return *node
+//	np.GoToTheBack()
+	return *np
 }
 
 func main() {
-	input :=[]int {2,4,2,5,6,7,8,6,5,6,3,1}
+	input :=[]int {1,2,3,5}
 	nv:= addStuff(input)	
-	nv.GoToTheBack()
-	ps2(nv)
+	nv.Oscillate()
+	
 	
 
 /*
