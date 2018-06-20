@@ -1,72 +1,51 @@
 package linkedList
 
-import (
+import(
 	"fmt"
-	"errors"
 )
 
 type Node struct {
-	Next     *Node
 	Previous *Node
-	Data     int
+	Data int
+	Next *Node
 }
 
-func InitializeNode(value int) *Node {
-	nv := Node{nil, nil, value}
-	return &nv
-}
-
-func (n *Node) AddToBack(value int) (*Node, error) {
-	var nv Node
-	if n.Previous != nil {
-		return &nv, errors.New("Cannot append")
-	}
-	nv = Node{n, nil, value}
-	n.Previous = &nv
-
-	return &nv, nil
-}
-
-func (n *Node) AddToFront(value int) (*Node, error) {
-	var nv Node
-	if n.Next != nil {
-		return &nv, errors.New("Cannot append to the rear")
-	}
-	nv = Node{nil, n, value}
-	n.Next = &nv
-
-	return &nv, nil
-}
-
-func (n *Node) GoToTheFront() {
-	for n.Next != nil {
-		*n = *n.Next
-	}
-}
-
-func (n *Node) GoToTheBack() {
+func (n *Node) AddRear(value int){
 	for n.Previous != nil {
-		*n = *n.Previous
+		n = n.Previous
 	}
+	nv := Node{nil,value, nil}
+	nv.Next = n;
+	n.Previous = &nv
 }
 
-func (n *Node) Oscillate(){
-	for n.Previous!=nil {
-		fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
-		*n= *n.Previous
+func (n *Node) AddFront(value int){
+	for n.Next != nil {
+		n = n.Next
 	}
-	for i:=0 ; i<=3; i++ {
-                fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
-                *n= *n.Next
+	nv:= Node{nil,value,nil}
+	nv.Previous = n;
+	n.Next = &nv
+}
+
+func AddStuffRear(n *Node,sli []int){
+        for _,s := range sli {
+                n.AddRear(s)
         }
-	fmt.Println(n.Previous," \t",n.Data,"\t",n.Next)
-
 }
 
-func Delete(n Node) {
-	n1 := *n.Previous
-	n2 := *n.Next
-	n1.Next = &n2
-	n2.Previous = &n1
+func AddStuffFront(n *Node,sli []int){
+        for _,s := range sli {
+                n.AddFront(s)
+        }
 }
 
+func PrintStuffL2R(np Node){
+	for np.Previous != nil {
+		np = *np.Previous
+	}
+	for np.Next !=nil {
+		fmt.Println(np.Data)
+		np = *np.Next
+	}
+}
