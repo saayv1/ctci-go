@@ -19,6 +19,13 @@ func DeleteDuplicates(n linkedList.Node)*linkedList.Node{
 		}
 		np = np.Next
 	}
+	   x,ok := m[np.Data]
+                if ok {
+                        x++;
+                        m[np.Data] = x
+                }       else    {
+                        m[np.Data] = 1
+                }
 	for key,value := range m {
 		if value==1 {
 			delete(m,key)
