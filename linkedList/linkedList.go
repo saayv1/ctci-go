@@ -40,6 +40,32 @@ func AddStuffFront(n *Node,sli []int){
         }
 }
 
+func Delete(n *Node)*Node{
+	if n.Previous == nil && n.Next !=nil {
+		np := n.Next
+		np.Previous = nil
+		n.Next=nil
+		n.Previous = nil
+		return np
+	}else if n.Next == nil && n.Previous!=nil {
+		np := n.Previous
+		np.Next = nil
+		n.Next = nil
+		n.Previous = nil
+		return np
+	}else if n.Next != nil && n.Previous!=nil {
+		n1 := n.Previous
+		n2 := n.Next
+		n1.Next = n2
+		n2.Previous = n1
+		n.Previous = nil
+		n.Next = nil
+		return n1
+	}
+	return n
+}
+		
+
 func PrintStuffL2R(np Node){
 	for np.Previous != nil {
 		np = *np.Previous
@@ -48,4 +74,13 @@ func PrintStuffL2R(np Node){
 		fmt.Println(np.Data)
 		np = *np.Next
 	}
+	fmt.Println(np.Data)
+}
+
+func GoBack(n Node)*Node{
+	np := &n
+	for np.Previous!=nil {
+		np = np.Previous
+	}
+	return np
 }
