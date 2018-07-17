@@ -10,7 +10,6 @@ func main() {
 	for i := 1; i < 100; i++ {
 		n.AddFront(i)
 	}
-
 	k := 14
 	nv := linkedList.GoBack(n)
 	fmt.Println(nv.Data)
